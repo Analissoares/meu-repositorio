@@ -17,8 +17,7 @@ st.set_page_config(
 st.title("🏦 Mapa de Sistemas Bancários por Bairro")
 st.markdown("Visualização interativa de dados geográficos carregados do GitHub")
 
-# URLs dos arquivos no GitHub (substitua com seus URLs reais)
-GITHUB_RAW_URL = "https://raw.githubusercontent.com/seu_usuario/seu_repositorio/main/"
+GITHUB_RAW_URL = "https://raw.githubusercontent.com/Analissoares/meu-repositorio/main/"
 BAIRROS_URL = GITHUB_RAW_URL + "dados/bairros.geojson"
 SB_URL = GITHUB_RAW_URL + "dados/dados_SB.geojson"
 
