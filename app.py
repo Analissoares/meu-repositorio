@@ -3,10 +3,7 @@ import folium
 import geopandas as gpd
 from folium.plugins import MarkerCluster, HeatMap, MeasureControl
 import branca.colormap as cm
-import requests
-from io import BytesIO
-import json
-from streamlit_folium import st_folium  # Importação essencial
+from streamlit_folium import st_folium
 
 # Configuração da página
 st.set_page_config(
@@ -23,14 +20,12 @@ GITHUB_RAW_URL = "https://raw.githubusercontent.com/Analissoares/meu-repositorio
 BAIRROS_URL = GITHUB_RAW_URL + "dados/bairros.geojson"
 SB_URL = GITHUB_RAW_URL + "dados/dados_SB.geojson"
 
+# Corrigido: carregar GeoJSON diretamente da URL
 @st.cache_data(ttl=3600)
 def load_geojson_from_github(url):
-    """Carrega um arquivo GeoJSON do GitHub"""
+    """Carrega um arquivo GeoJSON diretamente da URL"""
     try:
-        response = requests.get(url)
-        response.raise_for_status()
-        # Carrega o GeoJSON diretamente da resposta como BytesIO
-        return gpd.read_file(BytesIO(response.content))
+        return gpd.read_file(url)
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {str(e)}")
         st.error(f"URL tentada: {url}")
@@ -42,9 +37,7 @@ with st.spinner('🔄 Carregando dados do GitHub...'):
     df_sb = load_geojson_from_github(SB_URL)
 
 # Verifica se os dados carregaram corretamente
-if bairros_data is None:
-    st.stop()
-if df_sb is None:
+if bairros_data is None or df_sb is None:
     st.stop()
 
 # Processamento dos dados
@@ -128,7 +121,7 @@ if show_clusters:
 if show_heatmap and locations:
     HeatMap(locations, name='Mapa de Calor').add_to(m)
 
-# Adiciona controle
+# Adiciona controles ao mapa
 colormap.add_to(m)
 folium.LayerControl().add_to(m)
 m.add_child(MeasureControl())
