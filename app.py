@@ -6,7 +6,7 @@ import branca.colormap as cm
 import requests
 from io import BytesIO
 import json
-from streamlit_folium import st_folium  # ✅ Importação essencial
+from streamlit_folium import st_folium  # Importação essencial
 
 # Configuração da página
 st.set_page_config(
@@ -29,6 +29,7 @@ def load_geojson_from_github(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
+        # Carrega o GeoJSON diretamente da resposta como BytesIO
         return gpd.read_file(BytesIO(response.content))
     except Exception as e:
         st.error(f"Erro ao carregar o arquivo: {str(e)}")
@@ -156,4 +157,5 @@ st.download_button(
     file_name='sistemas_bancarios_por_bairro.csv',
     mime='text/csv',
 )
+
 
