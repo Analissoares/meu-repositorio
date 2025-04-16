@@ -1,6 +1,5 @@
-streamlit
-geopandas
-matplotlib
-rasterio
-numpy
-pillow
+streamlit==1.32.0
+geopandas==0.14.0
+folium==0.15.1
+branca==0.5.0
+requests==2.31.0
