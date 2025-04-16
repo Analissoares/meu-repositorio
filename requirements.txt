@@ -1,6 +1,10 @@
-streamlit
-folium
-geopandas
-streamlit-folium
-branca
-requests
+streamlit>=1.32
+geopandas>=0.14
+folium>=0.15
+branca>=0.6
+streamlit-folium>=0.12
+requests>=2.31
+pyproj>=3.6
+shapely>=2.0
+fiona>=1.9
+rtree>=1.2
